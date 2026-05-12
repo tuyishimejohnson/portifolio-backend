@@ -18,3 +18,8 @@ async def create_skill(skill: SkillCreate, db: Session = Depends(get_db)):
 @router.get("/", response_model=List[SkillResponse])
 async def get_skills(db: Session = Depends(get_db)):
     return service.get_skills(db)
+
+
+@router.get("/{skill_id}", response_model=SkillResponse, status_code=200)
+async def get_skill_by_id(skill_id: int, db: Session = Depends(get_db)):
+    return service.get_skill_by_id(skill_id, db)
