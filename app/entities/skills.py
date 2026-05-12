@@ -1,6 +1,6 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, JSON
 
-from app.db.database import Base
+from app.database.core import Base
 
 
 class Skill(Base):
@@ -8,4 +8,4 @@ class Skill(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     category = Column(String, index=True)
-    skills = Column(String)
+    skills = Column(JSON)

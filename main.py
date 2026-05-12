@@ -1,10 +1,13 @@
 from fastapi import FastAPI
-from app.routers import skills
-import uvicorn
 
-app = FastAPI()
+from app.database.core import engine, Base
+from app.skills import controller
 
-app.include_router(skills.router)
+Base.metadata.create_all(bind=engine)
 
-if __name__ == "__main__":
-    uvicorn.run("main:app", host="localhost", port=8000, reload=True)
+app = FastAPI(
+    title="Portfolio Backend",
+    description="REST API for my developer portfolio",
+)
+
+app.include_router(controller.router)
